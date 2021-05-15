@@ -1,0 +1,24 @@
+{
+    "name": "talmira/envelophp",
+    "description": "Parse dotenv file for native php applications",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "theahmedlatif",
+            "email": "ahmed.hlatif@outlook.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.6",
+        "ext-pdo": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Envelope\\": "src/",
+            "Envelope\\Database\\": "config/",
+            "Envelope\\Tests\\Unit\\": "test/"
+        }
+    }
+}

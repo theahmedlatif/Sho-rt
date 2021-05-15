@@ -1,0 +1,43 @@
+[
+    {
+        "name": "talmira/envelophp",
+        "version": "v2.0.0",
+        "version_normalized": "2.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/theahmedlatif/envelophp.git",
+            "reference": "35c02515b19f0b3743864d79937e01a5743fd6ef"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/theahmedlatif/envelophp/zipball/35c02515b19f0b3743864d79937e01a5743fd6ef",
+            "reference": "35c02515b19f0b3743864d79937e01a5743fd6ef",
+            "shasum": ""
+        },
+        "require": {
+            "ext-pdo": "*",
+            "php": ">=5.6"
+        },
+        "time": "2021-04-27T22:24:06+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Envelope\\": "src/",
+                "Envelope\\Database\\": "config/",
+                "Envelope\\Tests\\Unit\\": "test/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "theahmedlatif",
+                "email": "ahmed.hlatif@outlook.com"
+            }
+        ],
+        "description": "Parse dotenv file for native php applications"
+    }
+]
