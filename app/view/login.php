@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 }
 ?>
-<div class="px-4 py-2 mt-5 homeHeader" style="height: 70vh;">
+<div class="px-4 py-2 mt-5 homeHeader" >
     <main class="form-signin p-5 d-block mx-auto mb-4 col-6 bg-body shadow-sm rounded">
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <div class="text-center">

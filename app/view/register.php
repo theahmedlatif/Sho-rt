@@ -70,11 +70,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
 <!--HTML FORM-->
 
-<div class="px-4 py-2 mt-5  homeHeader">
+<div class="px-4 py-2 mt-5 homeHeader">
     <main class="form-signin p-5 d-block mx-auto mb-4 col-6 bg-body shadow-sm rounded">
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <div class="row text-center">
-                <img class="mb-4" src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+
                 <h1 class="h3 mb-3 fw-normal">Registration</h1>
             </div>
 
