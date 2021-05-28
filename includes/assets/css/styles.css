@@ -3,5 +3,5 @@ html, body {
 }
 
 .homeHeader {
-  min-height: 65vh !important;
+  height: 90% !important;
 }

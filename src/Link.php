@@ -1,7 +1,7 @@
 <?php
 namespace Short;
 
-require_once dirname(__DIR__,1).'/vendor/autoload.php';
+require_once dirname(__DIR__, 1) . '/vendor/autoload.php';
 use Envelope\Database\MysqlDatabase;
 
 class Link extends MysqlDatabase {
@@ -38,5 +38,15 @@ class Link extends MysqlDatabase {
         $newLink->insert("INSERT INTO links (inputLink, outputLink, userId)
                                    VALUES (:inputLink, :outputLink, :userEmail)", $binders);
         $newLink->closeConnection();
+    }
+
+    public function displayLinks($id)
+    {
+        $display = new MysqlDatabase();
+        $display->getConnection();
+
+        $binders = [":userId" => $id];
+        $result = $display->select("SELECT inputLink, outputLink, created_at FROM links WHERE userId = :userId", $binders);
+        return $result;
     }
 }

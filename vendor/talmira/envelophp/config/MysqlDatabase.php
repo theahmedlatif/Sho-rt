@@ -98,7 +98,7 @@ class MysqlDatabase extends Envelope
         } catch (PDOException $exception) {
             return $statement . "<br>" . $exception->getMessage();
         }
-        return $result[0];
+        return $result;
 
         $this->closeConnection();
     }

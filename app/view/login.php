@@ -1,10 +1,10 @@
 <?php
-session_start();
+require dirname(__DIR__, 2) . '/includes/layouts/header.php';
+
 if(isset($_SESSION['login_user']))
 {
-    header('location: home.php');
+    header('location: index.php');
 }
-require dirname(__DIR__, 2) . '/includes/layouts/header.php';
 ?>
 
 <?php
@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 }
 ?>
-<div class="px-4 py-2 mt-5 homeHeader">
+<div class="px-4 py-2 mt-5 homeHeader" style="height: 70vh;">
     <main class="form-signin p-5 d-block mx-auto mb-4 col-6 bg-body shadow-sm rounded">
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <div class="text-center">
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <div class="col">
-                <input type="email" class="form-control" placeholder="name@example.com" name="userEmail">
+                <input type="email" class="form-control" placeholder="name@example.com" name="userEmail" value="<?php if (isset($_POST['userEmail'])) echo $_POST['userEmail']; ?>">
                 <?php
                 if ($userEmailErr != null)
                     echo "<div class='invalid-feedback d-block'>".$userEmailErr."</div>";
@@ -67,19 +67,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $loginUser = new User();
             $loggedUser = $loginUser->userLogin($userEmail,$userPassword);
+            $_SESSION['test'] = $loggedUser;
             if ($loggedUser == false)
             {
                 $userPasswordErr = $userEmailErr = "Check your email or password may be incorrect!";
             }
             else if ($loggedUser != false)
             {
-                $_SESSION['login_user'] = $loggedUser['userName'];
+                 $_SESSION['login_user'] = $loggedUser['userName'];
                 $_SESSION['login_email'] = $loggedUser['userEmail'];
                 $_SESSION['login_id'] = $loggedUser['id'];
 
                 if(isset($_SESSION['login_user']))
                 {
-                    header('location: home.php');
+                    header('location: index.php');
                 }
             }
         }

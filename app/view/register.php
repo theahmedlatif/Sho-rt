@@ -1,10 +1,12 @@
 <?php
-session_start();
-if(isset($_SESSION['login_user']))
-{
-    header('location: home.php');
-}
 require dirname(__DIR__, 2) . '/includes/layouts/header.php';
+/**
+
+ */
+if(isset($_SESSION['login_email']))
+{
+    header('location: index.php');
+}
 ?>
 
 <?php
@@ -64,8 +66,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             $userPasswordErr = $validateUserPassword->validateUserPassword($_POST['userPassword'],$_POST['confirmPassword']);
     }
 }
-
 ?>
+
+<!--HTML FORM-->
 
 <div class="px-4 py-2 mt-5  homeHeader">
     <main class="form-signin p-5 d-block mx-auto mb-4 col-6 bg-body shadow-sm rounded">
@@ -78,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             <div class="row gy-3 my-2">
                 <div class="col">
                     <label for="basic-url" class="form-label">Name</label>
-                    <input type="text" class="form-control" placeholder="Name" aria-label="Name" name="userName">
+                    <input type="text" class="form-control" placeholder="Name" aria-label="Name" name="userName" value="<?php if (isset($_POST['userName'])) echo $_POST['userName']; ?>">
                     <?php
                     if ($usernameErr != null)
                         echo "<div class='invalid-feedback d-block'>".$usernameErr."</div>";
@@ -86,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                 </div>
                 <div class="col">
                     <label for="basic-url" class="form-label">Email</label>
-                    <input type="text" class="form-control" placeholder="Email" aria-label="Email" name="userEmail">
+                    <input type="text" class="form-control" placeholder="Email" aria-label="Email" name="userEmail" value="<?php if (isset($_POST['userEmail'])) echo $_POST['userEmail']; ?>">
                     <?php
                     if ($userEmailErr != null)
                         echo "<div class='invalid-feedback d-block'>".$userEmailErr."</div>";
@@ -117,21 +120,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     </main>
 </div>
 
+<!--END OF HTML FORM-->
+
 <?php
 if ($usernameErr == false && $userEmailErr == false && $userPasswordErr == false)
 {
     $newUser = new User();
     $userCreationFeedback = $newUser->createUser($userName, $userPassword, $userEmail);
-    if(is_integer($userCreationFeedback))
+    //echo $userCreationFeedback;
+    if(is_string($userCreationFeedback)==true)
     {
-        session_start();
         $_SESSION['login_user'] = $userName;
         $_SESSION['login_email'] = $userEmail;
         $_SESSION['login_id'] = $userCreationFeedback;
 
         if(isset($_SESSION['login_user']))
         {
-            header('location: home.php');
+            header('location: index.php');
         }
     }
 }

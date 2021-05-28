@@ -1,7 +1,7 @@
 <?php
 namespace Short;
 
-require_once dirname(__DIR__,1).'/vendor/autoload.php';
+require_once dirname(__DIR__, 1) . '/vendor/autoload.php';
 use Envelope\Database\MysqlDatabase;
 
 class User extends MysqlDatabase{
@@ -29,6 +29,7 @@ class User extends MysqlDatabase{
     public function createUser($userName, $userPassword, $userEmail)
     {
         $newUser = new MysqlDatabase();
+        //$userPassword = password_hash($userPassword,PASSWORD_DEFAULT);
 
         $binders = [":userName" => $userName, ":userPassword" => $userPassword, ":userEmail" => $userEmail];
         return $newUser->insert("INSERT INTO users (userName, userPassword, userEmail)
@@ -118,12 +119,14 @@ class User extends MysqlDatabase{
         $newLoginUser = new MysqlDatabase();
         $newLoginUser->getConnection();
 
+
         $binders = [":userEmail" => $userEmail, ":userPassword" => $userPassword];
 
-        $feedback = $newLoginUser->select('SELECT id, userName, userEmail FROM users WHERE userEmail = :userEmail AND userPassword = :userPassword',$binders);
-        if ($feedback)
+        $feedback = $newLoginUser->select('SELECT id, userName, userEmail, userPassword FROM users WHERE userEmail = :userEmail AND userPassword = :userPassword',$binders);
+
+        if ($feedback /*&& password_verify($userPassword,$feedback[0]['userPassword'])*/)
         {
-            return $feedback;
+            return $feedback[0];
         }
         else
         {
