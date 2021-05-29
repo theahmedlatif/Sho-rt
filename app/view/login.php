@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             else if ($loggedUser != false)
             {
-                 $_SESSION['login_user'] = $loggedUser['userName'];
+                $_SESSION['login_user'] = $loggedUser['userName'];
                 $_SESSION['login_email'] = $loggedUser['userEmail'];
                 $_SESSION['login_id'] = $loggedUser['id'];
 
